@@ -23,3 +23,10 @@ jobs:
         with:
           name: results
           path: 賃貸物件情報.xlsx
+<ins>
+      - name:エラーログの出力
+        if: failure()    # 直前のstepが失敗したときのみ実行
+        run: |
+          echo "Upload results step failed."
+          echo "Check the log for details."
+</ins>
