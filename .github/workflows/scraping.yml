@@ -4,28 +4,22 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python 3.9
-        uses: actions/upload-artifact@v4
-        with:
-          python-version: 3.9
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Run scraper
-        run: python main.py
-      - name: Upload results
-        uses: actions/upload-artifact@v4
-        with:
-          name: results
-          path: 賃貸物件情報.xlsx
-      - name: エラーログの出力  # ステップ名を修正
-        if: failure()
-        run: |
-          echo "Upload results step failed."
-          echo "Check the log for details."
-
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: Set up Python 3.9
+          uses: actions/setup-python@v4
+          with:
+            python-version: 3.9
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+        - name: Run scraper
+          run: python main.py
+        - name: Upload results
+          uses: actions/upload-artifact@v4
+          with:
+            name: results
+            path: 賃貸物件情報.xlsx  # path引数を追加
