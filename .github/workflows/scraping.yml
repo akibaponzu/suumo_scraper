@@ -1,25 +1,25 @@
-name: SUUMO Scraper  # ワークフローの名前（任意）
+name: SUUMO Scraper
 on:
   schedule:
-    - cron: '0 0 * * *'  # 毎日0時0分（UTC）に実行 (日本時間では9時)
-  workflow_dispatch:  # 手動実行を可能にするための設定（任意）
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 jobs:
-  build:  # ジョブの名前（任意）
-    runs-on: ubuntu-latest  # 実行環境（Ubuntu Linuxを使用）
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3  # リポジトリをチェックアウト（必須）
-      - name: Set up Python 3.9  # ステップの名前（任意）
-        uses: actions/setup-python@v4  # Pythonのセットアップ
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.9  # 使用するPythonのバージョンを指定
-      - name: Install dependencies  # ステップの名前（任意）
+          python-version: 3.9
+      - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip  # pipを更新
-          pip install -r requirements.txt  # 必要なライブラリをインストール
-      - name: Run scraper  # ステップの名前（任意）
-        run: python main.py  # スクレイピングスクリプトを実行
-      - name: Upload results  # ステップの名前（任意）
-        uses: actions/upload-artifact@v3  # 成果物をアップロード
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run scraper
+        run: python main.py
+      - name: Upload results  # アクションのバージョンを修正
+        uses: actions/upload-artifact@v3  # または、@latest など
         with:
-          name: results  # アーティファクトの名前
-          path: 賃貸物件情報.xlsx  # アップロードするファイルのパス
+          name: results
+          path: 賃貸物件情報.xlsx
