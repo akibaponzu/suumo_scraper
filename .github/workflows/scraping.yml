@@ -18,15 +18,14 @@ jobs:
           pip install -r requirements.txt
       - name: Run scraper
         run: python main.py
-      - name: Upload results  # アクションのバージョンを修正
-        uses: actions/upload-artifact@v3  # または、@latest など
+      - name: Upload results
+        uses: actions/upload-artifact@v3
         with:
           name: results
           path: 賃貸物件情報.xlsx
-<ins>
-      - name:エラーログの出力
-        if: failure()    # 直前のstepが失敗したときのみ実行
+      - name: エラーログの出力  # ステップ名を修正
+        if: failure()
         run: |
           echo "Upload results step failed."
           echo "Check the log for details."
-</ins>
+
